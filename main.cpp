@@ -15,6 +15,8 @@ void tengah_tingkat_1();
 void seperempatBola(int scaley, int scalex, GLfloat r);
 void setengahLingkaran();
 
+//Alpha coba pull
+
 float xrot = 0.0f;
 float yrot = 0.0f;
 float xdiff = 0.0f;
