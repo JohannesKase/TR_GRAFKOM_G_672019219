@@ -21,7 +21,7 @@ void setengahLingkaran();
 void lisSetengahLingkaran();
 void lisKacaDome();
 void mobil();
-void timer();
+void timer(int);
 
 //alim
 void tingkat_1();
@@ -30,7 +30,7 @@ void tingkat_3();
 void tambah_tingkat_3();
 
 float x_pos = 0.0f;
-float delta = 0.025f;
+float delta = 0.05f;
 
 float xrot = 0.0f;
 float yrot = 0.0f;
@@ -49,7 +49,7 @@ int main(int argc, char **argv){
     glutCreateWindow("ALPHA FAUSTA IKRAR SETYADI - 672019219");
     init();
 
-    //glutTimerFunc(0, timer, 0);
+    glutTimerFunc(0, timer, 0);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -101,7 +101,7 @@ void tampil(void){
     tengah_tingkat_1(); //lt 1 di bawah dome
     pilar_tengah();
     tengah_tingkat_2(); //lt2 di bawah dome (sejajar dome)
-    
+
     //panggil fungsi alim-----------------------------------------------------------------------------------------------------------
     tingkat_1();
     tingkat_2();
@@ -1563,18 +1563,16 @@ void lisSetengahLingkaran(){
 }
 
 void mobil(){
-
-
 glPushMatrix();
     glPushMatrix();
     glTranslated(140.0-x_pos, 1.0, 60.0);
     glScalef(2.0, 2.0, 2.0);
     glPushMatrix();
-        glColor3f(0.9, 0.9, 0.9);              // body
+        glColor3f(0.95, 0.95, 0.95);              // body
         glScalef(4,1,2);
         glutSolidCube(.5);
         glTranslatef(-.05,.3,0);
-        glColor3f(0.9, 0.9, 0.9);
+        glColor3f(0.95, 0.95, 0.95);
         glScalef(0.6,3,2);
         glutSolidCube(.25);
         glTranslatef(-.12,.001,-.001);
