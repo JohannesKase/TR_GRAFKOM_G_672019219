@@ -43,6 +43,7 @@ void kapsul_2();
 void payung();
 void payung2();
 void lampu();
+void stand();
 
 //hans
 void fondasi();
@@ -187,7 +188,8 @@ void tampil(void){
     kapsul_2();
     payung();
     payung2();
-    lampu();
+    lampu(); //lampu jalan raya
+    stand(); //stand dagang
 
     //========================================================================================
 
@@ -223,7 +225,119 @@ void tampil(void){
     glutSwapBuffers();
 }
 
-//fungsinya alim
+//fungsinya alim---
+void stand(){
+    for(int a=0 ; a<8 ; a++){
+        //atap
+        glBegin(GL_TRIANGLES);
+        glColor3f(245/255.f, 245/255.f, 245/255.f);
+        glVertex3f(52.0+a*6, 2.0, 46.0);
+        glVertex3f(55.0+a*6, 2.0, 46.0);
+        glVertex3f(53.5+a*6, 3.0, 47.5);
+        glEnd();
+        glBegin(GL_TRIANGLES);
+        glColor3f(245/255.f, 245/255.f, 245/255.f);
+        glVertex3f(52.0+a*6, 2.0, 49.0);
+        glVertex3f(55.0+a*6, 2.0, 49.0);
+        glVertex3f(53.5+a*6, 3.0, 47.5);
+        glEnd();
+        glBegin(GL_TRIANGLES);
+        glColor3f(1.0, 1.0, 1.0);
+        glVertex3f(52.0+a*6, 2.0, 46.0);
+        glVertex3f(52.0+a*6, 2.0, 49.0);
+        glVertex3f(53.5+a*6, 3.0, 47.5);
+        glEnd();
+        glBegin(GL_TRIANGLES);
+        glColor3f(1.0, 1.0, 1.0);
+        glVertex3f(55.0+a*6, 2.0, 46.0);
+        glVertex3f(55.0+a*6, 2.0, 49.0);
+        glVertex3f(53.5+a*6, 3.0, 47.5);
+        glEnd();
+
+        //alas
+        glBegin(GL_QUADS);
+        glColor3f(0.8, 0.8, 0.8);
+        glVertex3f(52.0+a*6, 0.1, 46.0);
+        glVertex3f(55.0+a*6, 0.1, 46.0);
+        glVertex3f(55.0+a*6, 0.1, 49.0);
+        glVertex3f(52.0+a*6, 0.1, 49.0);
+        glEnd();
+
+        for(int i=0 ; i<2 ; i++){
+            //tiang
+            //dpn
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(52.0+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(52.0+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(52.1+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(52.1+a*6, 0.1, 46.0+i*2.9);
+            glEnd();
+            //blkg
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(52.0+a*6, 0.1, 46.1+i*2.9);
+            glVertex3f(52.0+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(52.1+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(52.1+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+            //kiri
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(52.0+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(52.0+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(52.0+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(52.0+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+            //kanan
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(52.1+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(52.1+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(52.1+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(52.1+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+        }
+
+
+        for(int i=0 ; i<2 ;i++){
+            //tiang
+            //dpn
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(54.9+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(54.9+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(55.0+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(55.0+a*6, 0.1, 46.0+i*2.9);
+            glEnd();
+            //blkg
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(54.9+a*6, 0.1, 46.1+i*2.9);
+            glVertex3f(54.9+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(55.0+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(55.0+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+            //kiri
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(54.9+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(54.9+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(54.9+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(54.9+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+            //kanan
+            glBegin(GL_QUADS);
+            glColor3f(0.1, 0.1, 0.1);
+            glVertex3f(55.0+a*6, 0.1, 46.0+i*2.9);
+            glVertex3f(55.0+a*6, 2.0, 46.0+i*2.9);
+            glVertex3f(55.0+a*6, 2.0, 46.1+i*2.9);
+            glVertex3f(55.0+a*6, 0.1, 46.1+i*2.9);
+            glEnd();
+        }
+    }
+}
+
 void lampu(){
 
     for(int i=0 ; i<=7 ;i++){
