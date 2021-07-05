@@ -9,6 +9,8 @@ void mouse (int button, int state, int x,int y);
 void keyboard(unsigned char,int,int);
 void ukuran(int,int);
 void mouseMotion(int x, int y);
+
+//alpha
 void lantai();
 void entrance();
 void taman();
@@ -21,9 +23,11 @@ void setengahLingkaran();
 void lisSetengahLingkaran();
 void lisKacaDome();
 void mobil();
+void mobil2();
 void timer(int);
 void kapsul_tengah();
 void pilar_tengah();
+void lift();
 
 //alim
 void tingkat_1();
@@ -58,7 +62,9 @@ void tingkat3_kiri();
 
 
 float x_pos = 0.0f;
+float y_pos = 0.0f;
 float delta = 0.05f;
+bool toRight = true;
 
 float xrot = 0.0f;
 float yrot = 0.0f;
@@ -130,7 +136,7 @@ void tampil(void){
     pilar_tengah();
     tengah_tingkat_2(); //lt2 di bawah dome (sejajar dome)
     kapsul_tengah();
-   
+
 
 
     glPushMatrix();
@@ -158,7 +164,9 @@ void tampil(void){
 
     lisKacaDome();
     mobil();
-  
+    mobil2();
+    lift();
+
     //panggil fungsi calvin=================================================
     tingkat1_kiri();
     tingkat2_kiri();
@@ -180,7 +188,7 @@ void tampil(void){
     payung2();
 
     //========================================================================================
-    
+
     //Fungsi hans
     glPushMatrix();
     glTranslatef(112.0,12.5,5.4);
@@ -207,7 +215,7 @@ void tampil(void){
     glTranslatef(5.8,0.0,5.8);
     tabungmiring();
     glPopMatrix();
-    
+
     //===========================================================================================
     glPopMatrix();
     glutSwapBuffers();
@@ -1292,7 +1300,6 @@ void payung2()
     glPopMatrix();
 }
 
-
 void pilar_1()
 {
         for(int i = 0 ; i<12 ; i++){
@@ -1515,12 +1522,100 @@ void pilar_2_mundur()
     }
 }
 
+//Alpha
 
+void lift(){
+    glPushMatrix();
+    glTranslatef(88.0, 0.0, 3.0);
+    glPushMatrix();
+        glTranslatef(0.0, 0.0+y_pos, 0.0);
+            glColor4f(0.7, 0.7, 0.7, 0.6);
+            glBegin(GL_QUADS);
+                glVertex3f(0.1, 0, 0.1);
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(2.9, 4, 0.1);
+                glVertex3f(0.1, 4, 0.1);
+
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 4, 2.9);
+                glVertex3f(0.1, 4, 2.9);
+
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 4, 2.9);
+                glVertex3f(2.9, 4, 0.1);
+
+                glVertex3f(0.1, 0, 0.1);
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(0.1, 4, 2.9);
+                glVertex3f(0.1, 4, 0.1);
+
+                glColor3f(0.3, 0.3, 0.3);
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(0.1, 0, 0.1);
+
+                glColor3f(0.3, 0.3, 0.3);
+                glVertex3f(0.1, 3.98, 2.9);
+                glVertex3f(2.9, 3.98, 2.9);
+                glVertex3f(2.9, 3.98, 0.1);
+                glVertex3f(0.1, 3.98, 0.1);
+            glEnd();
+    glPopMatrix();
+
+    glColor4f(0.9, 0.9, 0.9, 0.4);
+        glBegin(GL_QUADS);
+            glVertex3f(0, 0, 0);
+            glVertex3f(3, 0, 0);
+            glVertex3f(3, 12, 0);
+            glVertex3f(0, 12, 0);
+
+            glVertex3f(0, 0, 3);
+            glVertex3f(3, 0, 3);
+            glVertex3f(3, 12, 3);
+            glVertex3f(0, 12, 3);
+
+            glVertex3f(3, 0, 0);
+            glVertex3f(3, 0, 3);
+            glVertex3f(3, 12, 3);
+            glVertex3f(3, 12, 0);
+
+            glVertex3f(0, 0, 0);
+            glVertex3f(0, 0, 3);
+            glVertex3f(0, 12, 3);
+            glVertex3f(0, 12, 0);
+
+            glVertex3f(0.0, 4.0, 3);
+            glVertex3f(3.0, 4.0, 3);
+            glVertex3f(3.0, 4.0, 0);
+            glVertex3f(0.0, 4.0, 0);
+
+            glVertex3f(0.0, 8.0, 3);
+            glVertex3f(3.0, 8.0, 3);
+            glVertex3f(3.0, 8.0, 0);
+            glVertex3f(0.0, 8.0, 0);
+        glEnd();
+    glPopMatrix();
+}
 
 void timer(int){
     glutPostRedisplay();
     glutTimerFunc(100/30, timer, 0);
-    x_pos += delta;
+    if(x_pos < 120)
+        x_pos += delta;
+
+    if(y_pos < 8 && toRight)
+        y_pos += delta;
+    else
+        toRight = false;
+
+    if(y_pos > 0 && !toRight)
+        y_pos -= delta;
+    else
+        toRight = true;
+
 }
 
 void lantai(){
@@ -2538,6 +2633,45 @@ glPopMatrix();
 glFlush();
 }
 
+void mobil2(){
+glPushMatrix();
+    glPushMatrix();
+    glTranslated(20.0+x_pos, 1.0, 65.0);
+    glRotated(180, 0, 0.01, 0);
+    glScalef(2.0, 2.0, 2.0);
+    glPushMatrix();
+        glColor3f(0.95, 0.3, 0.2);              // body
+        glScalef(4,1,2);
+        glutSolidCube(.5);
+        glTranslatef(-.05,.3,0);
+        glColor3f(0.95, 0.3, 0.2);
+        glScalef(0.6,3,2);
+        glutSolidCube(.25);
+        glTranslatef(-.12,.001,-.001);
+        glScalef(1,1.8,2.48);
+        glRotatef(230, 0, 0, 250);
+        glutSolidCube(.1);
+        glPopMatrix();
+        glTranslatef(0,0,.5);
+        glPushMatrix();
+        glTranslatef(-.4,-.2,0);
+        glColor3f(0.4, 0.4, 0.4);
+        glutSolidTorus(.1,.2,8,8);       // wheel
+        glTranslatef(1,0,0);
+        glutSolidTorus(.1,.2,8,8);       // wheel
+        glPopMatrix();
+        glTranslatef(0,0,-1);
+        glPushMatrix();
+        glTranslatef(-.4,-.2,0);
+        glutSolidTorus(.1,.2,8,8);       // wheel
+        glTranslatef(1,0,0);
+        glutSolidTorus(.1,.2,8,8);       // wheel
+        glPopMatrix();
+        glPopMatrix();
+glPopMatrix();
+glFlush();
+}
+
 void kapsul_tengah(){
     //pagar antar kapsul
         glBegin(GL_QUADS);
@@ -3404,6 +3538,7 @@ void tabungmiring(){
     tabung();
     glPopMatrix();
 }
+
 void tingkat1_kiri (){
 
     //tingkat 1 kedepan
