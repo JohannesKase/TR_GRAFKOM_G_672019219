@@ -28,6 +28,8 @@ void timer(int);
 void kapsul_tengah();
 void pilar_tengah();
 void lift();
+void awan();
+void matahari();
 
 //alim
 void tingkat_1();
@@ -64,9 +66,11 @@ void tingkat3_kiri();
 
 
 float x_pos = 0.0f;
+float x_pos2 = 0.0f;
 float y_pos = 0.0f;
 float delta = 0.05f;
 bool toRight = true;
+bool toUp = true;
 
 float xrot = 0.0f;
 float yrot = 0.0f;
@@ -168,6 +172,8 @@ void tampil(void){
     mobil();
     mobil2();
     lift();
+    awan();
+    matahari();
 
     //panggil fungsi calvin=================================================
     tingkat1_kiri();
@@ -882,14 +888,6 @@ void tingkat_3()
     glVertex3f(98.0, 8.0, 0.0);
     glEnd();
 
-    //kiri
-    glBegin(GL_QUADS);
-    glColor3f(0.0, 0.0, 0.0);
-    glVertex3f(88.1, 4.0, 0.0);
-    glVertex3f(88.1, 8.0, 0.0);
-    glVertex3f(88.1, 8.0, 17.0);
-    glVertex3f(88.1, 4.0, 17.0);
-    glEnd();
 
     //atas kotak
     glBegin(GL_QUADS);
@@ -1952,7 +1950,81 @@ void pilar_2_mundur()
 
 void lift(){
     glPushMatrix();
-    glTranslatef(88.0, 0.0, 3.0);
+    glTranslatef(88.1, 0.0, 3.0);
+    glPushMatrix();
+        glTranslatef(0.0, 0.0+y_pos, 0.0);
+            glColor4f(0.7, 0.7, 0.7, 0.6);
+            glBegin(GL_QUADS);
+                glVertex3f(0.1, 0, 0.1);
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(2.9, 4, 0.1);
+                glVertex3f(0.1, 4, 0.1);
+
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 4, 2.9);
+                glVertex3f(0.1, 4, 2.9);
+
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 4, 2.9);
+                glVertex3f(2.9, 4, 0.1);
+
+                glVertex3f(0.1, 0, 0.1);
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(0.1, 4, 2.9);
+                glVertex3f(0.1, 4, 0.1);
+
+                glColor3f(0.3, 0.3, 0.3);
+                glVertex3f(0.1, 0, 2.9);
+                glVertex3f(2.9, 0, 2.9);
+                glVertex3f(2.9, 0, 0.1);
+                glVertex3f(0.1, 0, 0.1);
+
+                glColor3f(0.3, 0.3, 0.3);
+                glVertex3f(0.1, 3.98, 2.9);
+                glVertex3f(2.9, 3.98, 2.9);
+                glVertex3f(2.9, 3.98, 0.1);
+                glVertex3f(0.1, 3.98, 0.1);
+            glEnd();
+    glPopMatrix();
+
+    glColor4f(0.9, 0.9, 0.9, 0.4);
+        glBegin(GL_QUADS);
+            glVertex3f(0, 0, 0);
+            glVertex3f(3, 0, 0);
+            glVertex3f(3, 12, 0);
+            glVertex3f(0, 12, 0);
+
+            glVertex3f(0, 0, 3);
+            glVertex3f(3, 0, 3);
+            glVertex3f(3, 12, 3);
+            glVertex3f(0, 12, 3);
+
+            glVertex3f(3, 0, 0);
+            glVertex3f(3, 0, 3);
+            glVertex3f(3, 12, 3);
+            glVertex3f(3, 12, 0);
+
+            glVertex3f(0, 0, 0);
+            glVertex3f(0, 0, 3);
+            glVertex3f(0, 12, 3);
+            glVertex3f(0, 12, 0);
+
+            glVertex3f(0.0, 4.0, 3);
+            glVertex3f(3.0, 4.0, 3);
+            glVertex3f(3.0, 4.0, 0);
+            glVertex3f(0.0, 4.0, 0);
+
+            glVertex3f(0.0, 8.0, 3);
+            glVertex3f(3.0, 8.0, 3);
+            glVertex3f(3.0, 8.0, 0);
+            glVertex3f(0.0, 8.0, 0);
+        glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(63.9, 0.0, 3.0);
     glPushMatrix();
         glTranslatef(0.0, 0.0+y_pos, 0.0);
             glColor4f(0.7, 0.7, 0.7, 0.6);
@@ -2029,16 +2101,29 @@ void lift(){
 void timer(int){
     glutPostRedisplay();
     glutTimerFunc(100/30, timer, 0);
+    //Untuk mobil
     if(x_pos < 120)
         x_pos += delta;
 
-    if(y_pos < 8 && toRight)
+    //Untuk lift
+    if(y_pos < 8 && toUp)
         y_pos += delta;
+    else
+        toUp = false;
+
+    if(y_pos > 0 && !toUp)
+        y_pos -= delta;
+    else
+        toUp = true;
+
+    //Untuk awan
+    if(x_pos2 < 100 && toRight)
+        x_pos2 += delta;
     else
         toRight = false;
 
-    if(y_pos > 0 && !toRight)
-        y_pos -= delta;
+    if(x_pos2 > 0 && !toRight)
+        x_pos2 -= delta;
     else
         toRight = true;
 
@@ -2841,7 +2926,7 @@ void pilar_tengah(){
 void tengah_tingkat_2(){
     //belakang
     glBegin(GL_QUADS);
-    glColor3f(0.0, 0.0, 0.0);
+    glColor3f(0.9,0.7,0.6);
     glVertex3f(67.5, 4.0, 0.0);
     glVertex3f(67.5, 8.0, 0.0);
     glVertex3f(88.0, 8.0, 0.0);
@@ -2866,7 +2951,7 @@ void tengah_tingkat_2(){
     glVertex3f(67.5, 4.0, 15.0);
     glEnd();
 
-    //kiri
+    //kanan
     glBegin(GL_QUADS);
     glColor3f(0.0, 0.0, 0.0);
     glVertex3f(88, 4.0, 0.0);
@@ -2877,7 +2962,7 @@ void tengah_tingkat_2(){
 
     //atas
     glBegin(GL_QUADS);
-    glColor3f(0.87,0.65,0.4);
+    glColor3f(0.93,0.72,0.61);
     glVertex3f(67.5, 8.0, 00.0);
     glVertex3f(67.5, 8.0, 15.0);
     glVertex3f(88.0, 8.0, 15.0);
@@ -3320,6 +3405,89 @@ void kapsul_tengah(){
         glVertex3f(90.75+i*4 , 3.5 , 16.75);
         glEnd();
     }
+    glPopMatrix();
+}
+
+void awan(){
+    glColor3f(0.95, 0.95, 0.95);
+    glPushMatrix();
+        glTranslatef(0 + x_pos2, 0, 0);
+        glPushMatrix();
+            glTranslatef(50, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(54, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(52, 32, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(10+ x_pos2, 10, -20);
+        glPushMatrix();
+            glTranslatef(50, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(54, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(52, 32, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(30+ x_pos2, 0, -5);
+        glPushMatrix();
+            glTranslatef(50, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(54, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(52, 32, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslatef(-5+ x_pos2, 10, -30);
+        glPushMatrix();
+            glTranslatef(50, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(54, 30, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+
+        glPushMatrix();
+            glTranslatef(52, 32, 40);
+            glutSolidSphere(3, 100, 30);
+        glPopMatrix();
+    glPopMatrix();
+}
+
+void matahari(){
+    glColor3f(1.0, 1.0, 0.0);
+    glPushMatrix();
+    glTranslatef(140, 70, 45);
+    glutSolidSphere(7, 100, 100);
     glPopMatrix();
 }
 
@@ -4179,7 +4347,7 @@ glBegin(GL_QUADS);
     glEnd();
 
     //tingkat 3 kekanan depan
-glBegin(GL_QUADS);
+    glBegin(GL_QUADS);
     glColor4f(0.0, 0.0, 0.0 , 0.7);
     glVertex3f(12.5, 8.0, 12.5);
     glVertex3f(57.0, 8.0, 12.5);
