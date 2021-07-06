@@ -59,6 +59,14 @@ void gedungA();
 void tabung();
 void tabungmiring();
 
+    void kursi_1();
+    void kursi_2();
+    void kursi();
+    void kursitambahan();
+    void tv();
+    void kursitv();
+    void paktankursitv();
+
 //calvin
 void tingkat1_kiri();
 void tingkat2_kiri();
@@ -133,6 +141,9 @@ void tampil(void){
     glRotatef(yrot, 0.0f, 1.0f,0.0f);
     glTranslatef(-87.50,0.0,-29.0);
 
+
+
+
     //Fungsi Alpha==========================================================================
     lantai(); //lantai dasar untuk pemetaan
     taman(); //taman depan
@@ -174,6 +185,29 @@ void tampil(void){
     lift();
     awan();
     matahari();
+
+    //Fungsi hans (harus diatas biar bisa keliatan lewat kaca)
+    //=======================================tv kursi============================================
+    glPushMatrix();
+    glTranslatef(15.0,0.0,6.0);
+    glScalef(0.05,0.05,0.05);
+    for(int i=0; i<5; i++){
+        glTranslatef(150.0,0.0,0.0);
+        paktankursitv();
+    }
+    glPopMatrix();
+
+    glPushMatrix();
+    glRotatef(270.0,0.0,2700.0,0.0);
+    glTranslatef(14.0,0.0,-6.0);
+    glScalef(0.05,0.05,0.05);
+    for(int i=0; i<4; i++){
+        glTranslatef(150.0,0.0,0.0);
+        paktankursitv();
+    }
+    glPopMatrix();
+
+    //===========================================================================================
 
     //panggil fungsi calvin=================================================
     tingkat1_kiri();
@@ -3490,6 +3524,221 @@ void matahari(){
     glutSolidSphere(7, 100, 100);
     glPopMatrix();
 }
+
+
+void kursi_1(){
+    glBegin(GL_QUADS); //kiri
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 9.0, 10.0, 5.0);
+    glVertex3f( 9.0, 10.0,-5.0);
+    glVertex3f( 9.0, 0.0,-5.0);
+    glVertex3f( 9.0, 0.0, 5.0);
+    glEnd();
+    glBegin(GL_QUADS); //kanan
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 11.0, 10.0, 5.0);
+    glVertex3f( 11.0, 10.0,-5.0);
+    glVertex3f( 11.0, 0.0,-5.0);
+    glVertex3f( 11.0, 0.0, 5.0);
+    glEnd();
+    glBegin(GL_QUADS); //-kiri
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-9.0, 10.0, 5.0);
+    glVertex3f(-9.0, 10.0,-5.0);
+    glVertex3f(-9.0, 0.0,-5.0);
+    glVertex3f(-9.0, 0.0, 5.0);
+    glEnd();
+    glBegin(GL_QUADS); //-kanan
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-11.0, 10.0, 5.0);
+    glVertex3f(-11.0, 10.0,-5.0);
+    glVertex3f(-11.0, 0.0,-5.0);
+    glVertex3f(-11.0, 0.0, 5.0);
+    glEnd();
+
+    glBegin(GL_QUADS); // top
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 9.0, 10.0, 5.0);
+    glVertex3f( 9.0, 10.0,-5.0);
+    glVertex3f( 11.0, 10.0,-5.0);
+    glVertex3f( 11.0, 10.0, 5.0);
+    glEnd();
+    glBegin(GL_QUADS); //-top
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-9.0, 10.0, 5.0);
+    glVertex3f(-9.0, 10.0,-5.0);
+    glVertex3f(-11.0, 10.0,-5.0);
+    glVertex3f(-11.0, 10.0, 5.0);
+    glEnd();
+
+    glBegin(GL_QUADS); // dpn
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 9.0, 10.0, 5.0);
+    glVertex3f( 11.0, 10.0, 5.0);
+    glVertex3f( 11.0, 0.0, 5.0);
+    glVertex3f( 9.0, 0.0, 5.0);
+    glEnd();
+    glBegin(GL_QUADS); //-dpn
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-9.0, 10.0, 5.0);
+    glVertex3f(-11.0, 10.0, 5.0);
+    glVertex3f(-11.0, 0.0, 5.0);
+    glVertex3f(-9.0, 0.0, 5.0);
+    glEnd();
+
+    glBegin(GL_QUADS); // belakang
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 9.0, 10.0,-5.0);
+    glVertex3f( 11.0, 10.0,-5.0);
+    glVertex3f( 11.0, 0.0,-5.0);
+    glVertex3f( 9.0, 0.0,-5.0);
+    glEnd();
+    glBegin(GL_QUADS); //-belakang
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-9.0, 10.0,-5.0);
+    glVertex3f(-11.0, 10.0,-5.0);
+    glVertex3f(-11.0, 0.0,-5.0);
+    glVertex3f(-9.0, 0.0,-5.0);
+    glEnd();
+}
+
+void kursi_2(){
+    glBegin(GL_QUADS); // top
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f(-11.5, 9.5, 4.5);
+    glVertex3f(-11.5, 9.5,-4.5);
+    glVertex3f( 11.5, 9.5,-4.5);
+    glVertex3f( 11.5, 9.5, 4.5);
+    glEnd();
+
+    glBegin(GL_QUADS); // bot
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f(-11.5, 6.5, 4.5);
+    glVertex3f(-11.5, 6.5,-4.5);
+    glVertex3f( 11.5, 6.5,-4.5);
+    glVertex3f( 11.5, 6.5, 4.5);
+    glEnd();
+
+    glBegin(GL_QUADS); // dpn
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f(-11.5, 6.5, 4.5);
+    glVertex3f(-11.5, 9.5, 4.5);
+    glVertex3f( 11.5, 9.5, 4.5);
+    glVertex3f( 11.5, 6.5, 4.5);
+    glEnd();
+
+    glBegin(GL_QUADS); // blk
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f(-11.5, 6.5,-4.5);
+    glVertex3f(-11.5, 9.5,-4.5);
+    glVertex3f( 11.5, 9.5,-4.5);
+    glVertex3f( 11.5, 6.5,-4.5);
+    glEnd();
+
+    glBegin(GL_QUADS); // kanan
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f( 11.5, 6.5, 4.5);
+    glVertex3f( 11.5, 9.5, 4.5);
+    glVertex3f( 11.5, 9.5,-4.5);
+    glVertex3f( 11.5, 6.5,-4.5);
+    glEnd();
+
+    glBegin(GL_QUADS); // kiri
+    glColor3f(226/255.f,158/255.f,76/255.f);
+    glVertex3f(-11.5, 6.5, 4.5);
+    glVertex3f(-11.5, 9.5, 4.5);
+    glVertex3f(-11.5, 9.5,-4.5);
+    glVertex3f(-11.5, 6.5,-4.5);
+    glEnd();
+}
+
+void kursi(){
+ kursi_1();
+ kursi_2();
+}
+
+void kursitambahan(){
+    glPushMatrix();
+    glTranslated(30,0,0);
+    kursi();
+    glTranslated(-60,0,0);
+    kursi();
+    glPopMatrix();
+}
+
+void tv(){
+    glPushMatrix();
+    glTranslated(0,0,20);
+    glBegin(GL_QUADS); // dpn
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 33.0, 40.0, 15.0);
+    glVertex3f(-33.0, 40.0, 15.0);
+    glVertex3f(-33.0,  0.0, 15.0);
+    glVertex3f( 33.0,  0.0, 15.0);
+    glEnd();
+    glBegin(GL_QUADS); // blk
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 33.0, 40.0, 30.0);
+    glVertex3f(-33.0, 40.0, 30.0);
+    glVertex3f(-33.0,  0.0, 30.0);
+    glVertex3f( 33.0,  0.0, 30.0);
+    glEnd();
+    glBegin(GL_QUADS); // top
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 33.0, 40.0, 15.0);
+    glVertex3f(-33.0, 40.0, 15.0);
+    glVertex3f(-33.0, 40.0, 30.0);
+    glVertex3f( 33.0, 40.0, 30.0);
+    glEnd();
+    glBegin(GL_QUADS); // kanan
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f( 33.0,  0.0, 15.0);
+    glVertex3f( 33.0, 40.0, 15.0);
+    glVertex3f( 33.0, 40.0, 30.0);
+    glVertex3f( 33.0,  0.0, 30.0);
+    glEnd();
+    glBegin(GL_QUADS); // kiri
+    glColor3f(1.0,1.0,1.0);
+    glVertex3f(-33.0,  0.0, 15.0);
+    glVertex3f(-33.0, 40.0, 15.0);
+    glVertex3f(-33.0, 40.0, 30.0);
+    glVertex3f(-33.0,  0.0, 30.0);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glColor3f(0.2,0.2,0.2);
+    glVertex3f(-30.0, 38.0, 14.99);
+    glVertex3f(-30.0, 2.0, 14.99);
+    glVertex3f( 30.0, 2.0, 14.99);
+    glVertex3f( 30.0, 38.0, 14.99);
+    glEnd();
+    glBegin(GL_QUADS);
+    glColor3f(0.0,0.0,0.0);
+    glVertex3f(-29.0, 37.0, 14.98);
+    glVertex3f(-29.0, 3.0, 14.98);
+    glVertex3f( 29.0, 3.0, 14.98);
+    glVertex3f( 29.0, 37.0, 14.98);
+    glEnd();
+
+    glPopMatrix();
+}
+
+void kursitv(){
+    kursi();
+    kursitambahan();
+    tv();
+}
+
+void paktankursitv(){
+    glPushMatrix();
+    glTranslated(0.0,0.0,-45.0);
+    kursitv();
+    glTranslatef(0.0,0.0,90.0);
+    glRotatef(180.0,0.0,180.0,0.0);
+    kursitv();
+    glPopMatrix();
+}
+
 
 //===========================================Gedung Tambahan====================================================
 
